@@ -241,6 +241,38 @@ body.welcome-mode main.wrap{max-width:1280px;padding:18px 12px 28px}
 }
 </style>
 
+
+<style>
+/* FINAL: header dalaman sahaja */
+body:not(.welcome-mode) > header{
+  background: #35105f url('hipogo-header-dalaman.png') center center / cover no-repeat !important;
+  aspect-ratio: 877 / 771;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 22px rgba(55,15,85,.20);
+}
+body:not(.welcome-mode) > header .hero{
+  visibility: hidden !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body:not(.welcome-mode) > header::before,
+body:not(.welcome-mode) > header::after{
+  display:none !important;
+}
+@media (min-width: 760px){
+  body:not(.welcome-mode) > header{
+    aspect-ratio: 877 / 500;
+    background-position: center 52% !important;
+  }
+}
+</style>
+
 </head>
 <body class="welcome-mode">
 <header><div class="wrap hero">
