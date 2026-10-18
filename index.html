@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HiPoK – Histogram & Poligon Kekerapan Interaktif</title>
+<style>
+:root{--navy:#183153;--blue:#2878c8;--pale:#eef6ff;--ink:#17202a;--muted:#65758b;--line:#d8e2ee;--white:#fff;--good:#18794e;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f9fc;color:var(--ink)}
+.wrap{max-width:1100px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,#183153,#2878c8);color:white;border-radius:24px;padding:28px;text-align:center}
+.hero h1{font-size:44px;margin:5px}.hero p{margin:6px}.by{display:inline-block;margin-top:14px;padding:12px 18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:14px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.tabs button,.btn,.ans{min-height:48px;border-radius:13px;border:1px solid var(--line);background:white;padding:10px 14px;font-weight:700;cursor:pointer}.tabs button.active,.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step,.stat{background:var(--pale);border-radius:14px;padding:14px}
+label{font-size:14px;font-weight:700}input,textarea{width:100%;font-size:16px;padding:12px;margin-top:6px;border:1px solid var(--line);border-radius:12px;background:white}textarea{min-height:115px}
+.hidden{display:none}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:780px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:center}th{background:var(--pale)}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.stat small{display:block;color:var(--muted)}.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}.chart{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}
+.note{color:var(--muted);font-size:14px}.feedback{font-weight:700;margin-top:12px}.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:760px){.tabs{grid-template-columns:1fr 1fr}.grid,.steps,.stats,.charts{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<div style="font-size:12px;letter-spacing:3px">INOVASI PdP MATEMATIK</div>
+<h1>HiPoK</h1>
+<p><b>Histogram & Poligon Kekerapan Interaktif</b></p>
+<div class="by"><b>Pn. Rosni binti Rasid</b><br>Pensyarah Matematik<br>Kolej Vokasional Puteri</div>
+<p style="font-size:13px;margin-top:12px">SP 1.1.1 – 1.1.4 · Data Terkumpul</p>
+</section>
+
+<nav class="tabs">
+<button class="tab active" data-page="belajar">📘 Mod Belajar</button>
+<button class="tab" data-page="latihan">✏️ Mod Latihan</button>
+<button class="tab" data-page="auto">📊 Mod Automatik</button>
+<button class="tab" data-page="cabaran">🏆 Mod Cabaran</button>
+</nav>
+
+<section id="belajar" class="page">
+<div class="card"><h2>Bagaimana data menjadi graf?</h2><p class="note">Ikuti proses pembinaan jadual taburan kekerapan sebelum menghasilkan graf.</p>
+<div class="steps">
+<div class="step"><b>1. Data</b><br><small>Minimum, maksimum dan julat.</small></div>
+<div class="step"><b>2. Kelas</b><br><small>Bilangan kelas dan saiz kelas.</small></div>
+<div class="step"><b>3. Jadual</b><br><small>Sempadan, titik tengah dan kekerapan.</small></div>
+<div class="step"><b>4. Graf</b><br><small>Histogram dan poligon kekerapan.</small></div>
+</div></div>
+<div class="card"><h3>Konsep penting</h3>
+<div class="grid">
+<div class="step"><b>Julat</b><br>maksimum − minimum</div>
+<div class="step"><b>Titik tengah</b><br>(had bawah + had atas) ÷ 2</div>
+<div class="step"><b>Kekerapan longgokan</b><br>jumlah kekerapan sehingga kelas tersebut</div>
+</div>
+<p class="note">Histogram menggunakan sempadan kelas pada paksi-x dan kekerapan pada paksi-y. Poligon kekerapan menggunakan titik tengah pada paksi-x.</p>
+</div>
+</section>
+
+<section id="latihan" class="page hidden">
+<div class="card"><h2>Latihan Berpandu</h2><p>Data: <b>11, 14, 16, 18, 20, 22, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41</b></p>
+<div class="grid"><label>Nilai minimum<input id="mn" type="number"></label><label>Nilai maksimum<input id="mx" type="number"></label><label>Julat<input id="rg" type="number"></label></div>
+<p><button class="btn primary" id="semak">Semak jawapan</button></p><div id="fb" class="feedback"></div><div id="hint" class="step hidden">Petunjuk: cari nilai paling kecil dan paling besar dahulu. Julat = maksimum − minimum.</div>
+</div></section>
+
+<section id="auto" class="page hidden">
+<div class="card"><h2>Pembina HiPoK Automatik</h2><p class="note">Masukkan data integer, dipisahkan dengan koma, ruang atau baris baharu.</p>
+<textarea id="data">25,28,31,33,35,36,38,40,42,43,45,47,48,50,52,54,55,57,59,60,62,64,66,68</textarea>
+<div style="display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin-top:10px"><label style="max-width:160px">Bilangan kelas<input id="k" type="number" min="2" max="12" value="6"></label><button class="btn primary" id="jana">Jana HiPoK</button></div>
+<div id="status" class="feedback"></div></div>
+<div id="sum" class="stats"></div>
+<div class="card scroll"><table><thead><tr><th>Selang kelas</th><th>Sempadan bawah</th><th>Sempadan atas</th><th>Titik tengah</th><th>Kekerapan</th><th>Kekerapan longgokan</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="charts"><div class="chart"><h3>Histogram</h3><div id="hgraph"></div></div><div class="chart"><h3>Poligon Kekerapan</h3><div id="pgraph"></div></div></div>
+</section>
+
+<section id="cabaran" class="page hidden">
+<div class="card"><div style="display:flex;justify-content:space-between"><div><h2>Cabaran HiPoK</h2><p class="note">Jawab 5 soalan dan lihat tahap penguasaan.</p></div><div>Skor<br><b id="score" style="font-size:24px">0/5</b></div></div>
+<div id="question"></div><div id="qfeedback" class="feedback"></div><p><button id="next" class="btn primary hidden">Soalan seterusnya</button> <button id="restart" class="btn hidden">Cuba semula</button></p></div>
+</section>
+
+<div class="footer">HiPoK · Inovasi PdP Matematik · Kolej Vokasional Puteri</div>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.page').forEach(x=>x.classList.add('hidden'));$('#'+b.dataset.page).classList.remove('hidden')});
+$('#semak').onclick=()=>{const ok=+$('#mn').value===11&&+$('#mx').value===41&&+$('#rg').value===30;$('#fb').textContent=ok?'✓ Syabas! Semua jawapan tepat. Julat = 41 − 11 = 30.':'Belum tepat. Cuba semula menggunakan petunjuk.';$('#fb').style.color=ok?'var(--good)':'var(--bad)';$('#hint').classList.toggle('hidden',ok)};
+const fmt=n=>Number.isInteger(n)?n:+n.toFixed(2);
+function graph(rs,poly){
+ const W=560,H=300,L=48,T=18,B=55,iw=W-L-15,ih=H-T-B,m=Math.max(1,...rs.map(r=>r.f));
+ let s=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" aria-label="${poly?'Poligon kekerapan':'Histogram'}">`;
+ for(let j=0;j<=5;j++){let y=T+ih-j*ih/5,v=Math.round(m*j/5);s+=`<line x1="${L}" y1="${y}" x2="${W-15}" y2="${y}" stroke="#d8e2ee"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="10">${v}</text>`}
+ s+=`<line x1="${L}" y1="${T}" x2="${L}" y2="${T+ih}" stroke="#17202a"/><line x1="${L}" y1="${T+ih}" x2="${W-15}" y2="${T+ih}" stroke="#17202a"/>`;
+ if(!poly){let bw=iw/rs.length;rs.forEach((r,i)=>{let h=r.f/m*ih,x=L+i*bw,y=T+ih-h;s+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="#8ab8e6" stroke="#183153"/><text x="${x+bw/2}" y="${T+ih+17}" text-anchor="middle" font-size="9">${r.lo}-${r.hi}</text><text x="${x+bw/2}" y="${Math.max(14,y-5)}" text-anchor="middle" font-size="10">${r.f}</text>`})}
+ else{let ps=[{mid:rs[0].mid-rs[0].w,f:0},...rs,{mid:rs.at(-1).mid+rs[0].w,f:0}],mi=ps[0].mid,ma=ps.at(-1).mid,xy=ps.map(q=>[L+(q.mid-mi)/(ma-mi)*iw,T+ih-q.f/m*ih]);s+=`<polyline points="${xy.map(z=>z.join(',')).join(' ')}" fill="none" stroke="#2878c8" stroke-width="3"/>`;ps.forEach((q,i)=>s+=`<circle cx="${xy[i][0]}" cy="${xy[i][1]}" r="4" fill="#183153"/><text x="${xy[i][0]}" y="${T+ih+17}" text-anchor="middle" font-size="9">${fmt(q.mid)}</text>`)}
+ s+=`<text x="${L+iw/2}" y="${H-7}" text-anchor="middle" font-size="11">${poly?'Titik tengah':'Selang kelas'}</text></svg>`;return s
+}
+function build(){
+ let a=$('#data').value.split(/[\s,;]+/).map(Number).filter(Number.isFinite),k=Math.max(2,Math.min(12,+$('#k').value||6));
+ if(a.length<2){$('#status').textContent='Masukkan sekurang-kurangnya dua data.';return}
+ let mn=Math.min(...a),mx=Math.max(...a),range=mx-mn,w=Math.max(1,Math.ceil((range+1)/k)),start=Math.floor(mn),rs=[],cum=0;
+ for(let i=0;i<k;i++){let lo=start+i*w,hi=lo+w-1,lb=lo-.5,ub=hi+.5,f=a.filter(x=>x>=lb&&(i===k-1?x<=ub:x<ub)).length;cum+=f;rs.push({lo,hi,lb,ub,mid:(lo+hi)/2,f,cum,w})}
+ if(rs.reduce((s,r)=>s+r.f,0)<a.length&&k<12){$('#k').value=k+1;return build()}
+ $('#sum').innerHTML=[['Bil. data',a.length],['Minimum',mn],['Maksimum',mx],['Julat',range],['Bil. kelas',k],['Saiz kelas',w]].map(x=>`<div class="stat"><small>${x[0]}</small><b>${x[1]}</b></div>`).join('');
+ $('#rows').innerHTML=rs.map(r=>`<tr><td>${r.lo} – ${r.hi}</td><td>${r.lb}</td><td>${r.ub}</td><td>${fmt(r.mid)}</td><td><b>${r.f}</b></td><td>${r.cum}</td></tr>`).join('');
+ $('#hgraph').innerHTML=graph(rs,false);$('#pgraph').innerHTML=graph(rs,true);$('#status').textContent='✓ Jadual dan graf berjaya dijana.';$('#status').style.color='var(--good)'
+}
+$('#jana').onclick=build;build();
+const Q=[['Apakah formula julat?',['Maksimum − minimum','Maksimum + minimum','Maksimum ÷ minimum'],0],['Sempadan bawah kelas 20–29 ialah…',['20','19.5','20.5'],1],['Titik tengah kelas 40–49 ialah…',['44','44.5','45'],1],['Paksi-x poligon kekerapan menggunakan…',['Titik tengah','Kekerapan','Julat'],0],['Palang histogram bagi data terkumpul…',['Bersentuhan','Mesti berjauhan','Tidak perlu paksi'],0]];
+let qi=0,sc=0,lock=false;
+function showQ(){lock=false;let q=Q[qi];$('#question').innerHTML=`<b>Soalan ${qi+1} daripada 5</b><h3>${q[0]}</h3><div style="display:grid;gap:8px">${q[1].map((a,i)=>`<button class="ans" data-a="${i}">${a}</button>`).join('')}</div>`;$('#qfeedback').textContent='';$('#next').classList.add('hidden');$('#restart').classList.add('hidden');$$('.ans').forEach(b=>b.onclick=()=>answer(+b.dataset.a))}
+function answer(a){if(lock)return;lock=true;let good=a===Q[qi][2];if(good)sc++;$('#score').textContent=sc+'/5';$('#qfeedback').textContent=good?'✓ Betul!':'✗ Jawapan betul: '+Q[qi][1][Q[qi][2]];$('#qfeedback').style.color=good?'var(--good)':'var(--bad)';if(qi<4)$('#next').classList.remove('hidden');else{$('#qfeedback').textContent+=(sc>=4?' · Tahap: Cemerlang':sc>=3?' · Tahap: Baik':' · Tahap: Perlu Bimbingan');$('#restart').classList.remove('hidden')}}
+$('#next').onclick=()=>{qi++;showQ()};$('#restart').onclick=()=>{qi=0;sc=0;$('#score').textContent='0/5';showQ()};showQ();
+</script>
+</body></html>
