@@ -275,14 +275,13 @@ body:not(.welcome-mode) > header::after{
 
 
 <style>
-/* FIX DESKTOP: muka depan penuh satu skrin tanpa mengubah telefon/halaman dalaman */
+/* Desktop fit: kekalkan poster asal 3:2, muat sepenuhnya dalam ruang browser */
 @media (min-width:761px){
-  body.welcome-mode{height:100vh;overflow:hidden;background:#fff;}
-  body.welcome-mode main.wrap{max-width:none!important;width:100vw!important;height:100vh!important;padding:0!important;margin:0!important;}
-  body.welcome-mode #studentCard.hipogo-welcome{width:100vw!important;height:100vh!important;max-width:none!important;margin:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;}
-  body.welcome-mode .welcome-poster{width:100vw!important;height:100vh!important;aspect-ratio:auto!important;background:#fff!important;overflow:hidden!important;}
-  body.welcome-mode .welcome-poster>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;}
-  body.welcome-mode .welcome-live-form{left:37.1%!important;top:51.8%!important;width:36.5%!important;}
+ body.welcome-mode{overflow:hidden !important;}
+ body.welcome-mode main.wrap{max-width:none !important;width:100vw !important;height:100vh !important;padding:0 !important;margin:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;}
+ body.welcome-mode #studentCard.hipogo-welcome{width:min(100vw,150vh) !important;height:min(66.6667vw,100vh) !important;max-width:none !important;margin:0 auto !important;border-radius:0 !important;}
+ body.welcome-mode .welcome-poster{width:100% !important;height:100% !important;aspect-ratio:3/2 !important;}
+ body.welcome-mode .welcome-poster>img{width:100% !important;height:100% !important;object-fit:contain !important;object-position:center !important;}
 }
 </style>
 </head>
