@@ -284,6 +284,39 @@ body:not(.welcome-mode) > header::after{
  body.welcome-mode .welcome-poster>img{width:100% !important;height:100% !important;object-fit:contain !important;object-position:center !important;}
 }
 </style>
+
+<style>
+/* DESKTOP WELCOME: fit the complete 3:2 cover inside the visible browser area */
+@media (min-width:761px){
+  body.welcome-mode{overflow:hidden!important;background:#f7f1fb!important;}
+  body.welcome-mode main.wrap{
+    width:100vw!important;height:100vh!important;max-width:none!important;
+    padding:0!important;margin:0!important;display:flex!important;
+    align-items:center!important;justify-content:center!important;overflow:hidden!important;
+  }
+  body.welcome-mode #studentCard.hipogo-welcome{
+    position:relative!important;
+    width:min(100vw,150vh)!important;
+    height:min(100vh,66.6666667vw)!important;
+    max-width:none!important;margin:0!important;padding:0!important;
+    border-radius:0!important;box-shadow:none!important;overflow:hidden!important;
+  }
+  body.welcome-mode .welcome-poster{
+    position:relative!important;width:100%!important;height:100%!important;
+    aspect-ratio:auto!important;overflow:hidden!important;
+  }
+  body.welcome-mode .welcome-poster>img{
+    position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+    object-fit:fill!important;display:block!important;
+  }
+  body.welcome-mode .welcome-live-form{
+    position:absolute!important;left:37.1%!important;top:51.8%!important;width:36.5%!important;
+    margin:0!important;padding:0!important;z-index:3!important;
+  }
+  body.welcome-mode #welcomeFeedback{left:37%!important;top:76.2%!important;width:37%!important;}
+}
+</style>
+
 </head>
 <body class="welcome-mode">
 <header><div class="wrap hero">
